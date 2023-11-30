@@ -230,3 +230,4 @@ class App:
 if __name__ == "__main__":
     greeter = App("bolt://localhost:7687", "neo4j", "YOUR_PASSWORD")
     greeter.start()
+    
