@@ -228,5 +228,5 @@ class App:
             print("Invalid choice. Please enter a number between 1 and 4.")
 
 if __name__ == "__main__":
-    greeter = App("bolt://localhost:7687", "neo4j", "***********")
+    greeter = App("bolt://localhost:7687", "neo4j", "Algonquin.Suby22!")
     greeter.start()

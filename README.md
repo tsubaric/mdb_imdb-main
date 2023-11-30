@@ -1,3 +1,7 @@
+# Use the following command to run the program specific to your computer
+
+/usr/local/bin/python3.10 /Users/tommysubaric/mdb_hw8/setup.py
+
 # Upon running the setup.py file the user will be prompted to Enter their user ID.
 
 Enter your user ID (between 1 and 600): 
