@@ -9,33 +9,6 @@ class App:
     def close(self):
         self.driver.close()
 
-    def load_movies(self):
-        with self.driver.session() as session:
-            with open('movies.csv', newline='', encoding='utf-8') as csvfile:
-                reader = csv.DictReader(csvfile)
-                # Skip the header row
-                next(reader, None)
-                for row in reader:
-                    genres = row['genres'].split('|')
-                    for genre in genres:
-                        session.run("""
-                            MERGE (movie:Movie {movieId: $movieId})
-                            MERGE (g:Genre {name: $genre})
-                            MERGE (movie)-[:IN_GENRE]->(g)
-                            SET movie.title = $title
-                        """, movieId=int(row['movieId']), title=row['title'], genre=genre)
-
-    def load_ratings(self):
-        with self.driver.session() as session:
-            with open('ratings.csv', newline='', encoding='utf-8') as csvfile:
-                reader = csv.DictReader(csvfile)
-                for row in reader:
-                    session.run("""
-                        MERGE (user:User {userId: $userId})
-                        MERGE (movie:Movie {movieId: $movieId})
-                        MERGE (user)-[:RATED {rating: $rating}]->(movie)
-                    """, userId=int(row['userId']), movieId=int(row['movieId']), rating=float(row['rating']))
-
     ############ Step 1 definitions ############
     def get_user_id(self):
         return int(input("Enter your user ID (between 1 and 600): "))
